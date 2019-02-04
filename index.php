@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Erro World Sound</title>
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Righteous|Shrikhand|Poppins" rel="stylesheet"> 
     <link rel="shortcut icon" type="image/svg" href="Images/logoicon.svg">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -13,11 +15,20 @@
     
 </head>
 
+<body>
+
 <header>
 <img src="images/banner.png" class="img-fluid" alt="Responsive image">
+<img id="logo" src="images/logo.svg" alt="logo ERRO World Sound">
 </header>
 
-<body>
+<main>
+<section class="container">
+  <div class="row justify-content-center">
+  <h1 class="titre">La musique autour de vous</h1>
+  </div>
+</section>
+
 <section class="container">
   <div class="row justify-content-center">
     <div class="card col-md-4">
@@ -57,7 +68,7 @@
           let url = "";
 
         </script>
-          <p id="reponse" class="col-md-12">Le top des playlists écoutées (dans le pays où l'utilisateur se trouve)</p>
+          <p id="reponse" class="col-md-12">Le top des playlists écoutées</p>
       </div>
   </section>
   <div class="carousel-inner">
@@ -132,6 +143,16 @@
   </a>
 </section>
 
+</main>
+
+<footer>
+<section class="container">
+      <div class="row justify-content-end">
+        © ERRO - 2019  
+      </div>
+</section>
+</footer>
+
 
 <!-- code Robin -->
 <!-- 
@@ -142,7 +163,7 @@
 
 
 <!-- script jquery Robin -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
 
 <!-- Bootstrap
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
@@ -152,7 +173,5 @@
 <!-- script -->
 <script src="script.js"></script>
 </body>
-<footer>
 
-</footer>
 </html>

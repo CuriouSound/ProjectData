@@ -24,14 +24,47 @@ p {
 }
 
 
+
+    font-family: 'Righteous', cursive;
+    font-family: 'Shrikhand', cursive;
+    font-family: 'Poppins', sans-serif;
+
+
+
 */
 
 
 
 body {
-    font-family: helvetica;
-    margin: 0px;
-    padding: 0px;
+  font-family: 'Poppins', sans-serif;
+  color:#009dac;
+  margin: 0px;
+  padding: 0px;
+  background: rgb(9,9,121);
+  background: linear-gradient(0deg, rgba(9,9,121,1) 0%, rgba(0,138,255,1) 66%); 
+  }
+
+  #logo {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%; 
+  }
+
+
+  header {
+    padding-bottom: 5%;
+  }
+
+  footer {
+    padding-top:3%; 
+  }
+
+  .titre {
+    font-family: 'Poppins-Bold', sans-serif;
+    font-size: 50px;
+    padding: 4%;
   }
   
  
@@ -48,9 +81,6 @@ body {
     margin-bottom: 10px;
   }
 
-#carouselExampleControls {
-  
-}
  
 .car__item {
     display: inline-block;
@@ -58,9 +88,9 @@ body {
     padding: 10px;
     margin: 20px;
     width: 180px;
-    -webkit-box-shadow: 2px 3px 1px grey;
+    -webkit-box-shadow: 1px 3px 1px rgb(220,220,220);
     border: 1px solid rgb(220,220,220);
-    box-shadow: 0px 10px 3px rgb(220,220,220);
+    
   }
   
 .car__item p {
@@ -74,6 +104,17 @@ body {
     color: green;
     font-size: 4em;
   }
+
+.card {
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
+  width: 180px;
+  -webkit-box-shadow: 1px 3px 1px rgb(220,220,220);
+  border: 1px solid rgb(220,220,220); 
+  border-radius: 0px;
+}
   
 
 
@@ -92,12 +133,14 @@ body {
     position: relative;
     top: -200px;
     left: 450px;
+    color: green;
   }
   
 .slick-prev {
     position: relative;
     top: 192px;
     left: -450px;
+    color: green;
   }
   
 .btn {
@@ -139,7 +182,6 @@ body {
   } */
 
 
-
-/* *{
+ /* *{
     background-color: rgba(0,0,0,0.2)
-} */
+}  */
