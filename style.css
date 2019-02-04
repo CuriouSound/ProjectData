@@ -112,6 +112,12 @@ body {
 .mob-menu {
     display: none;
   }
+
+#demo, #reponse {
+
+ width: auto;
+ 
+}
   
 /* @media only screen and (max-width: 690px) {
     
