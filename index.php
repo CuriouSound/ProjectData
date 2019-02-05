@@ -44,6 +44,13 @@
       <p>
         Les 50 titres les plus écoutés dans le pays
       </p>
+      <div id="reponse-50titres">
+        <script id="user-profile-template"  type="text/x-handlebars-template">
+          <a href="{{playlists.items.0.external_urls.spotify}}"> <img class="media-object" width="150" src="{{playlists.items.0.images.0.url}}"/></a>
+          <p>{{playlists.items.0.name}}</p>
+        </div>
+      </script>
+      </div>
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -163,12 +170,13 @@
 
 
 <!-- script jquery Robin -->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-<!-- Bootstrap
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
 
 <!-- script -->
 <script src="script.js"></script>

@@ -20,7 +20,7 @@ function showPosition(position) {
 
   longitude = position.coords.longitude;
   latitude = position.coords.latitude; 
-   
+
   // requete a l'api en demandant la pos on concatene les variables ; on spécifie à la fin le langage de la réponse ; ça permet d'avoir le nom du pays toujours en Anglais, pour que Spotify fasse la bonne recherche.
   var lon="lon="+longitude;
   var lat="lat="+latitude;
@@ -28,23 +28,126 @@ function showPosition(position) {
   //dupliquer cette requete pour avoir le nom en Français
   var url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=en";
 
-    $.ajax({
-        url: url,
-        
-    })
-    .done(function( response ) {
+  $.ajax({
+    url: url,
+
+  })
+  .done(function( response ) {
       // le nom du pays se situe dans la case address, on l'affiche dans #response
-      let paysreponse = response.address.country;
+      let pays = response.address.country;
+                        /**
+         * Obtains parameters from the hash of the URL
+         * @return Object
+         */
+         function getHashParams() {
+          var hashParams = {};
+          var e, r = /([^&;=]+)=?([^&;]*)/g,
+          q = window.location.hash.substring(1);
+          while ( e = r.exec(q)) {
+           hashParams[e[1]] = decodeURIComponent(e[2]);
+         }
+         return hashParams;
+       }
+
+       var userProfileSource = document.getElementById('user-profile-template').innerHTML,
+       userProfileTemplate = Handlebars.compile(userProfileSource);
+       
+// https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/top-tracks?country=UK 
+var container = document.getElementById('reponse-50titres');
+
+container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
+//containers[1].url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
+//containers[2].url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+console.log(container.url);
+/*var oauthSource = document.getElementById('oauth-template').innerHTML,
+oauthTemplate = Handlebars.compile(oauthSource),
+oauthPlaceholder = document.getElementById('oauth');
+
+var params = getHashParams();*/
+
+var access_token = "BQC_xZTNJ_6TF6CM5NRUMB8nbnN_LqkeglGM7uHDM3ZIbHF-RUjElsH4M7CU72psGsp2fktrEzE5b5BscAgeQRaJNud_VZ7YN0mrVfjm8P9EB6aQ-DhlKSFYmPB57zVghH1rFw920BYY8Jh8UKCz2qQT-kjeKZcYJunHmgOonHqYskb_Jm7n";
+/*var refresh_token = params.refresh_token,
+error = params.error;*/
+var error = false;
+
+if (error) {
+  alert('There was an error during the authentication');
+} else {
+  if (access_token) {
+            // render oauth info
+            // oauthPlaceholder.innerHTML = oauthTemplate({
+            //   access_token: access_token,
+            //   refresh_token: refresh_token
+            // });
+
+
+              $.ajax({
+               url: container.url, 
+               headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                  $.ajax({
+                   url: response.playlists.items[0].tracks.href, 
+                   headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response2) {
+
+                    response.playlists.items[0].tracks = response2.items;
+
+                    console.log(response);
+                    container.innerHTML = userProfileTemplate(response);
+
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+
+            
+
+          } else {
+              // render initial screen
+              $('#login').show();
+              $('#loggedin').hide();
+            }
+
+            // document.getElementById('obtain-new-token').addEventListener('click', function() {
+            //   $.ajax({
+            //     url: '/refresh_token',
+            //     data: {
+            //       'refresh_token': refresh_token
+            //     }
+            //   }).done(function(data) {
+            //     access_token = data.access_token;
+            //     oauthPlaceholder.innerHTML = oauthTemplate({
+            //       access_token: access_token,
+            //       refresh_token: refresh_token
+            //     });
+            //   });
+            // }, false);
+          }
+          container.innerHTML = pays;
+
 
       // On peut ensuite utiliser la variable paysreponse comme élément de la requête à l'API spotify
 
     });
-    
-    var urlfr = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=fr";
-    $.ajax({
-      url: urlfr,
-    })
-    .done(function( response ) {
+
+  var urlfr = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=fr";
+  $.ajax({
+    url: urlfr,
+  })
+  .done(function( response ) {
       // sert a afficher le contenu du pays
       var divReponse = document.getElementById('reponse');
       // le nom du pays se situe dans la case address, on l'affiche dans #response
@@ -61,7 +164,7 @@ $('document').ready(function(){
 
     //appel de la fonction qui géolocalise
     getLocation();
-  
+
     //code du carousel
     var sldsToShow = 3;
     
@@ -69,17 +172,17 @@ $('document').ready(function(){
       sldsToShow = 1;
     }
     
-    $(".carousel__container").slick({
-      rows: 1,
-      slidesToShow: sldsToShow,
-      prevArrow: "<img src='images/caret_left.png' data-role='none' class='slick-prev'>",
-      nextArrow: "<img src='images/caret_right.png' data-role='none' class='slick-next'>"
-    });
-      
+    // $(".carousel__container").slick({
+    //   rows: 1,
+    //   slidesToShow: sldsToShow,
+    //   prevArrow: "<img src='images/caret_left.png' data-role='none' class='slick-prev'>",
+    //   nextArrow: "<img src='images/caret_right.png' data-role='none' class='slick-next'>"
+    // });
+
     $('.mob-menu').click(function(){
       $('.dropdown').toggle();
     });
 
 
 
-});
+  });
