@@ -17,17 +17,17 @@
 
 <body>
 
-<header>
-<img src="images/banner.png" class="img-fluid" alt="Responsive image">
-<img id="logo" src="images/logo.svg" alt="logo ERRO World Sound">
+<header class="img-fluid text-center ">
+  <div class="header" >
+    <img src="images/banner.png" class="img-fluid imgfond" alt="Responsive image">
+    
+  </div>
+  <img id="logo" class="img-fluid text-center justify-content-center" src="images/logo.svg" alt="logo ERRO World Sound">
+  <h1 class="titre">La musique autour de vous</h1>
 </header>
 
 <main>
-<section class="container">
-  <div class="row justify-content-center">
-  <h1 class="titre">La musique autour de vous</h1>
-  </div>
-</section>
+
 
 <section class="container">
   <div class="row justify-content-center">
@@ -35,7 +35,7 @@
       <p>
         Playlist des nouvelles sorties
       </p>
-        <img src="..." class="card-img-top" alt="...">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
         </div>
@@ -51,7 +51,7 @@
         </div>
       </script>
       </div>
-      <img src="..." class="card-img-top" alt="...">
+      <!-- <img src="..." class="card-img-top" alt="..."> -->
       <div class="card-body">
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
@@ -102,6 +102,7 @@
     <div class="carousel-item">
     <div class="carousel__container">
           <div class="car__item">
+            
             <h1>9</h1>
             <p>Basic plan</p>
           </div>
