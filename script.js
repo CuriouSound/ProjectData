@@ -54,12 +54,27 @@ function showPosition(position) {
        
 // https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/top-tracks?country=UK 
 var container = document.getElementById('reponse-50titres');
+var container2 = document.getElementById('playlist-new-sorties');
+var container3 = document.getElementById('playlist-basic');
+var container4 = document.getElementById('playlist-medium');
+var container5 = document.getElementById('business');
+var container6 = document.getElementById('master');
 
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
-//containers[1].url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
-//containers[2].url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+
+container2.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container3.url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
+container4.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container5.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container6.url =  "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+console.log(container.url);
+"https://api.spotify.com/v1/search?query=pop&type=artist&"+pays+"&offset=0&limit=20"
+
+
+
 
 console.log(container.url);
+
 
 var error = false;
 
@@ -69,21 +84,21 @@ if (error) {
   if (access_token) {
 
 
-              $.ajax({
-               url: container.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -91,9 +106,11 @@ if (error) {
 
                     response.playlists.items[0].tracks = response2.items;
 
+
+
                     console.log(response);
                     container.innerHTML = userProfileTemplate(response);
-
+                    
                     $('#login').hide();
                     $('#loggedin').show();
                   }
@@ -101,7 +118,171 @@ if (error) {
               }
             });
 
-            
+            $.ajax({
+             url: container2.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response3) {
+
+                    response.playlists.items[0].tracks = response3.items;
+
+
+
+                    console.log(response);
+                    container2.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+            $.ajax({
+             url: container3.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response4) {
+
+                    response.playlists.items[0].tracks = response4.items;
+
+
+
+                    console.log(response);
+                    container3.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+            $.ajax({
+             url: container4.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response5) {
+
+                    response.playlists.items[0].tracks = response5.items;
+
+
+
+                    console.log(response);
+                    container4.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+            $.ajax({
+             url: container4.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response6) {
+
+                    response.playlists.items[0].tracks = response6.items;
+
+
+
+                    console.log(response);
+                    container5.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+            $.ajax({
+             url: container4.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response7) {
+
+                    response.playlists.items[0].tracks = response7.items;
+
+
+
+                    console.log(response);
+                    container6.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
 
           } else {
               // render initial screen
@@ -118,11 +299,11 @@ if (error) {
 
     });
 
-  var urlfr = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=fr";
-  $.ajax({
-    url: urlfr,
-  })
-  .done(function( response ) {
+var urlfr = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=fr";
+$.ajax({
+  url: urlfr,
+})
+.done(function( response ) {
       // sert a afficher le contenu du pays
       var divReponse = document.getElementById('reponse');
       // le nom du pays se situe dans la case address, on l'affiche dans #response

@@ -40,16 +40,25 @@ body {
   color:#009dac;
   margin: 0px;
   padding: 0px;
-  background: rgb(9,9,121);
-  background: linear-gradient(0deg, rgba(9,9,121,1) 0%, rgba(0,138,255,1) 66%); 
+  background: rgb(48,48,207);
+  background: linear-gradient(0deg, rgba(48,48,207,1) 0%, rgba(11,183,218,1) 100%); 
+  }
+
+.header{
+    position: absolute;
+  }
+
+  .imgfond{
+  position: relative;
   }
 
   #logo {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30%; 
+  position: relative;
+  margin-top:25%;
+  /* top: 50%; */
+
+  /* transform: translate(-50%, -50%); */
+width: 30%;
   }
 
 
@@ -62,9 +71,9 @@ body {
   }
 
   .titre {
-    font-family: 'Poppins-Bold', sans-serif;
-    font-size: 50px;
-    padding: 4%;
+    font-family: 'Over the Rainbow', cursive;
+    font-size: 70px;
+    padding:2%;
   }
   
  
