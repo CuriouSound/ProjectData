@@ -58,27 +58,15 @@ var container = document.getElementById('reponse-50titres');
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
 //containers[1].url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
 //containers[2].url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+
 console.log(container.url);
-/*var oauthSource = document.getElementById('oauth-template').innerHTML,
-oauthTemplate = Handlebars.compile(oauthSource),
-oauthPlaceholder = document.getElementById('oauth');
 
-var params = getHashParams();*/
-
-var access_token = "BQC_xZTNJ_6TF6CM5NRUMB8nbnN_LqkeglGM7uHDM3ZIbHF-RUjElsH4M7CU72psGsp2fktrEzE5b5BscAgeQRaJNud_VZ7YN0mrVfjm8P9EB6aQ-DhlKSFYmPB57zVghH1rFw920BYY8Jh8UKCz2qQT-kjeKZcYJunHmgOonHqYskb_Jm7n";
-/*var refresh_token = params.refresh_token,
-error = params.error;*/
 var error = false;
 
 if (error) {
   alert('There was an error during the authentication');
 } else {
   if (access_token) {
-            // render oauth info
-            // oauthPlaceholder.innerHTML = oauthTemplate({
-            //   access_token: access_token,
-            //   refresh_token: refresh_token
-            // });
 
 
               $.ajax({
@@ -121,20 +109,7 @@ if (error) {
               $('#loggedin').hide();
             }
 
-            // document.getElementById('obtain-new-token').addEventListener('click', function() {
-            //   $.ajax({
-            //     url: '/refresh_token',
-            //     data: {
-            //       'refresh_token': refresh_token
-            //     }
-            //   }).done(function(data) {
-            //     access_token = data.access_token;
-            //     oauthPlaceholder.innerHTML = oauthTemplate({
-            //       access_token: access_token,
-            //       refresh_token: refresh_token
-            //     });
-            //   });
-            // }, false);
+
           }
           container.innerHTML = pays;
 
