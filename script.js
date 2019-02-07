@@ -61,6 +61,7 @@ var container5 = document.getElementById('business');
 var container6 = document.getElementById('master');
 
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
+
 container2.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
 container3.url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
 container4.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
@@ -68,26 +69,19 @@ container5.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+
 container6.url =  "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
 console.log(container.url);
 "https://api.spotify.com/v1/search?query=pop&type=artist&"+pays+"&offset=0&limit=20"
-/*var oauthSource = document.getElementById('oauth-template').innerHTML,
-oauthTemplate = Handlebars.compile(oauthSource),
-oauthPlaceholder = document.getElementById('oauth');
 
-var params = getHashParams();*/
 
-var access_token = "BQCoZ1hDL_DnSMua-05LmxstTyX51MrcepF-SoYLlU7BazY2Uzqzb_jXXmJY290aBmIulwi9FNQc3vVfF8kVM_u6nrf1oNbzfB-ILxGooQ4XY9XqoLL9dNylCNLX_6Wbdz7rsexvjPGFWc4wIZkFe2X_rAuEXAa8HPDONR4m25GszE00YW4R&refresh_token=AQCxyKVZpizZbfkJAE51q9FTQYPz1lRFTKhZkFu8otK8v6KWbfErH5fYHBWs6OuoHcDUpYqva6_GFTes8UeE913HDEOklJUP-XphXY6aV_QzgEHR56zuwXBKZ9Ta5jPZ0juC0w";
-/*var refresh_token = params.refresh_token,
-error = params.error;*/
+
+
+console.log(container.url);
+
+
 var error = false;
 
 if (error) {
   alert('There was an error during the authentication');
 } else {
   if (access_token) {
-            // render oauth info
-            // oauthPlaceholder.innerHTML = oauthTemplate({
-            //   access_token: access_token,
-            //   refresh_token: refresh_token
-            // });
 
 
             $.ajax({
@@ -296,20 +290,7 @@ if (error) {
               $('#loggedin').hide();
             }
 
-            // document.getElementById('obtain-new-token').addEventListener('click', function() {
-            //   $.ajax({
-            //     url: '/refresh_token',
-            //     data: {
-            //       'refresh_token': refresh_token
-            //     }
-            //   }).done(function(data) {
-            //     access_token = data.access_token;
-            //     oauthPlaceholder.innerHTML = oauthTemplate({
-            //       access_token: access_token,
-            //       refresh_token: refresh_token
-            //     });
-            //   });
-            // }, false);
+
           }
           container.innerHTML = pays;
 

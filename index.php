@@ -1,4 +1,83 @@
-<!DOCTYPE html>
+<?php session_start();
+
+  require "secret.php"; //le app_secret est dans un fichier à part qu'on ne commit pas sur github
+  if ((!isset($_COOKIE['token']) || empty($_COOKIE['token'])) && isset($_COOKIE['refresh_token']) && !empty($_COOKIE['refresh_token'])) :
+      /* Si on a pas de token dans les cookies (expiré) MAIS qu'on a un refresh_token,
+      on fait un requête pour obtenir un nouveau token*/
+    
+
+      /***************************
+          Début requête CURL
+      /***************************/
+      $ch = curl_init();
+
+      //les données obligatoires :  type de demande (ici, refresh), app_id, app_secret et focément le refresh_token
+      $data = [
+          'grant_type' => "refresh_token",
+          'refresh_token' => $_COOKIE['refresh_token'],
+          'client_id' => "3aabab9b39d94a038411b964540ac02d",
+          'client_secret' => $secret,
+      ];
+
+      curl_setopt($ch, CURLOPT_URL, "https://accounts.spotify.com/api/token");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec($ch);
+      $server_output = json_decode($server_output, true); //On convertit une réponse JSON en tableau
+
+      setrawcookie("token", $server_output['access_token'], time() + 60 );
+      //Quand le serveur a répondu avec un token, on le stock dans les cookies pour 1 heure (timestamp actuel + 60 fois une minute )
+
+      curl_close($ch);
+      /***************************
+            Fin requête CURL
+      /***************************/
+
+  elseif(!isset($_GET['code']) && !isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])) :
+      /*Si on a ni code d'authentification, ni token, ni refresh_token, c'est une première visite,
+      on redirige vers spotify pour se connecter au compte. la variable GET "callback" indique où
+      spotify renvoie après la connexion.*/
+    ?><script>
+    window.location.href = "https://accounts.spotify.com/authorize?client_id=3aabab9b39d94a038411b964540ac02d&response_type=code&redirect_uri=http://localhost/ProjetData";
+    </script><?php
+  elseif(!isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])) :
+      /*Si ni token, ni refresh_token, mais qu'on a le code d'acceptation, on demande un token*/
+
+      $ch = curl_init();
+
+      $data = [
+        'grant_type' => "authorization_code",
+        'code' => $_GET['code'],
+        'redirect_uri' => "http://localhost/ProjetData",
+        'client_id' => "3aabab9b39d94a038411b964540ac02d",
+        'client_secret' => $secret
+      ];
+
+      curl_setopt($ch, CURLOPT_URL,"https://accounts.spotify.com/api/token");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec($ch);
+
+
+      curl_close ($ch);
+
+      $server_output = json_decode($server_output, true);
+
+      setrawcookie ( "token" , $server_output['access_token'], time() + 60  );
+      setrawcookie("refresh_token", $server_output['refresh_token'], time() + 60 * 60 * 24);
+      //on stock le token pour 1 heure et le refresh_token pour 24heures
+
+    endif;
+
+
+
+?><!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -170,17 +249,32 @@
         <p id="demo"></p> -->
 
 
-<!-- script jquery Robin -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <!-- script jquery Robin -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
 
 <!-- script -->
-<script src="script.js"></script>
+
+    <script>
+      <?php
+      /*Ici on fait une variable JavaScript qui contient le token et qui existera dans script.js puisqu'on le fait
+      juste avant d'inclure script.js. 
+      Si on a le cookie, on utilise le cookie, sinon on utilise la réponse du serveur
+      (à la première demande, les cookies n'existent pas, ils existeront seulement au prochain refresh de la page)*/
+      
+      if(isset($_COOKIE['token']) && !empty($_COOKIE['token'])) : ?>
+        var access_token = "<?=$_COOKIE['token']?>";
+      <?php elseif(isset($server_output['access_token']) && !empty($server_output['access_token'])) : ?>
+        var access_token = "<?=$server_output['access_token']?>";
+      <?php endif; ?>
+    </script>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
