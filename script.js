@@ -62,19 +62,19 @@ var container6 = document.getElementById('master');
 
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
 container2.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
-container3.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container3.url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
 container4.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
 container5.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
-container6.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container6.url =  "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
 console.log(container.url);
-
+"https://api.spotify.com/v1/search?query=pop&type=artist&"+pays+"&offset=0&limit=20"
 /*var oauthSource = document.getElementById('oauth-template').innerHTML,
 oauthTemplate = Handlebars.compile(oauthSource),
 oauthPlaceholder = document.getElementById('oauth');
 
 var params = getHashParams();*/
 
-var access_token = "BQCXz4HkiXswBwgTO3HgL4cAlQRPZRnc8NPDUiJCi8nGKXxqi9a2wZz3vVXa0PMc_7CzYj5t-9ohGq1I-qxR4a-kXOcciPjucsDWVmwIJ_Fg7Ee_oqFG0F50iI8vDLN-u9is5D8Uff26BybscG8TPkHRAXfc3ySZfrOJ-qrquqET3JQfWngP&refresh_token=AQCY5DNpS9lVlsXHk01_wEJGWQ2LazwIu_T0xVXMMdGC_hykUlu7oAHiik31DeZtR5cgUj7bWPJpQjiMPQlApu8LqDe32RjuaaWgnerYv2CZ5bzyARcHWiTVGrR524OTOOV7sA";
+var access_token = "BQCoZ1hDL_DnSMua-05LmxstTyX51MrcepF-SoYLlU7BazY2Uzqzb_jXXmJY290aBmIulwi9FNQc3vVfF8kVM_u6nrf1oNbzfB-ILxGooQ4XY9XqoLL9dNylCNLX_6Wbdz7rsexvjPGFWc4wIZkFe2X_rAuEXAa8HPDONR4m25GszE00YW4R&refresh_token=AQCxyKVZpizZbfkJAE51q9FTQYPz1lRFTKhZkFu8otK8v6KWbfErH5fYHBWs6OuoHcDUpYqva6_GFTes8UeE913HDEOklJUP-XphXY6aV_QzgEHR56zuwXBKZ9Ta5jPZ0juC0w";
 /*var refresh_token = params.refresh_token,
 error = params.error;*/
 var error = false;
@@ -90,21 +90,21 @@ if (error) {
             // });
 
 
-              $.ajax({
-               url: container.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -124,21 +124,21 @@ if (error) {
               }
             });
 
-             $.ajax({
-               url: container2.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container2.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -157,21 +157,21 @@ if (error) {
                 });
               }
             });
-             $.ajax({
-               url: container3.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container3.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -190,21 +190,21 @@ if (error) {
                 });
               }
             });
-              $.ajax({
-               url: container4.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container4.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -223,21 +223,21 @@ if (error) {
                 });
               }
             });
-               $.ajax({
-               url: container4.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container4.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -256,21 +256,21 @@ if (error) {
                 });
               }
             });
-                   $.ajax({
-               url: container4.url, 
-               headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
+            $.ajax({
+             url: container4.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
                // nous passons par le template pour afficher les réponses
 
                success: function(response) {
 
-                  $.ajax({
-                   url: response.playlists.items[0].tracks.href, 
-                   headers: {
-                    'Authorization': 'Bearer ' + access_token
-                  },
+                $.ajax({
+                 url: response.playlists.items[0].tracks.href, 
+                 headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
 
                    // nous passons par le template pour afficher les réponses
 
@@ -318,11 +318,11 @@ if (error) {
 
     });
 
-  var urlfr = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=fr";
-  $.ajax({
-    url: urlfr,
-  })
-  .done(function( response ) {
+var urlfr = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&"+ lon + '&' + lat +"&"+"accept-language=fr";
+$.ajax({
+  url: urlfr,
+})
+.done(function( response ) {
       // sert a afficher le contenu du pays
       var divReponse = document.getElementById('reponse');
       // le nom du pays se situe dans la case address, on l'affiche dans #response
