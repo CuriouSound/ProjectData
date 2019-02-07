@@ -54,18 +54,27 @@ function showPosition(position) {
        
 // https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/top-tracks?country=UK 
 var container = document.getElementById('reponse-50titres');
+var container2 = document.getElementById('playlist-new-sorties');
+var container3 = document.getElementById('playlist-basic');
+var container4 = document.getElementById('playlist-medium');
+var container5 = document.getElementById('business');
+var container6 = document.getElementById('master');
 
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
-//containers[1].url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
-//containers[2].url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+container2.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container3.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container4.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container5.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container6.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
 console.log(container.url);
+
 /*var oauthSource = document.getElementById('oauth-template').innerHTML,
 oauthTemplate = Handlebars.compile(oauthSource),
 oauthPlaceholder = document.getElementById('oauth');
 
 var params = getHashParams();*/
 
-var access_token = "BQC_xZTNJ_6TF6CM5NRUMB8nbnN_LqkeglGM7uHDM3ZIbHF-RUjElsH4M7CU72psGsp2fktrEzE5b5BscAgeQRaJNud_VZ7YN0mrVfjm8P9EB6aQ-DhlKSFYmPB57zVghH1rFw920BYY8Jh8UKCz2qQT-kjeKZcYJunHmgOonHqYskb_Jm7n";
+var access_token = "BQCXz4HkiXswBwgTO3HgL4cAlQRPZRnc8NPDUiJCi8nGKXxqi9a2wZz3vVXa0PMc_7CzYj5t-9ohGq1I-qxR4a-kXOcciPjucsDWVmwIJ_Fg7Ee_oqFG0F50iI8vDLN-u9is5D8Uff26BybscG8TPkHRAXfc3ySZfrOJ-qrquqET3JQfWngP&refresh_token=AQCY5DNpS9lVlsXHk01_wEJGWQ2LazwIu_T0xVXMMdGC_hykUlu7oAHiik31DeZtR5cgUj7bWPJpQjiMPQlApu8LqDe32RjuaaWgnerYv2CZ5bzyARcHWiTVGrR524OTOOV7sA";
 /*var refresh_token = params.refresh_token,
 error = params.error;*/
 var error = false;
@@ -103,9 +112,11 @@ if (error) {
 
                     response.playlists.items[0].tracks = response2.items;
 
+
+
                     console.log(response);
                     container.innerHTML = userProfileTemplate(response);
-
+                    
                     $('#login').hide();
                     $('#loggedin').show();
                   }
@@ -113,7 +124,171 @@ if (error) {
               }
             });
 
-            
+             $.ajax({
+               url: container2.url, 
+               headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                  $.ajax({
+                   url: response.playlists.items[0].tracks.href, 
+                   headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response3) {
+
+                    response.playlists.items[0].tracks = response3.items;
+
+
+
+                    console.log(response);
+                    container2.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+             $.ajax({
+               url: container3.url, 
+               headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                  $.ajax({
+                   url: response.playlists.items[0].tracks.href, 
+                   headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response4) {
+
+                    response.playlists.items[0].tracks = response4.items;
+
+
+
+                    console.log(response);
+                    container3.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+              $.ajax({
+               url: container4.url, 
+               headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                  $.ajax({
+                   url: response.playlists.items[0].tracks.href, 
+                   headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response5) {
+
+                    response.playlists.items[0].tracks = response5.items;
+
+
+
+                    console.log(response);
+                    container4.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+               $.ajax({
+               url: container4.url, 
+               headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                  $.ajax({
+                   url: response.playlists.items[0].tracks.href, 
+                   headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response6) {
+
+                    response.playlists.items[0].tracks = response6.items;
+
+
+
+                    console.log(response);
+                    container5.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
+                   $.ajax({
+               url: container4.url, 
+               headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                  $.ajax({
+                   url: response.playlists.items[0].tracks.href, 
+                   headers: {
+                    'Authorization': 'Bearer ' + access_token
+                  },
+
+                   // nous passons par le template pour afficher les réponses
+
+                   success: function(response7) {
+
+                    response.playlists.items[0].tracks = response7.items;
+
+
+
+                    console.log(response);
+                    container6.innerHTML = userProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+                  }
+                });
+              }
+            });
 
           } else {
               // render initial screen
