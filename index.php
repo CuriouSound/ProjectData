@@ -28,7 +28,7 @@
       $server_output = curl_exec($ch);
       $server_output = json_decode($server_output, true); //On convertit une réponse JSON en tableau
 
-      setrawcookie("token", $server_output['access_token'], time() + 60 );
+      setrawcookie("token", $server_output['access_token'], time() + 60 *60 );
       //Quand le serveur a répondu avec un token, on le stock dans les cookies pour 1 heure (timestamp actuel + 60 fois une minute )
 
       curl_close($ch);
@@ -69,7 +69,7 @@
 
       $server_output = json_decode($server_output, true);
 
-      setrawcookie ( "token" , $server_output['access_token'], time() + 60  );
+      setrawcookie ( "token" , $server_output['access_token'], time() + 60*60  );
       setrawcookie("refresh_token", $server_output['refresh_token'], time() + 60 * 60 * 24);
       //on stock le token pour 1 heure et le refresh_token pour 24heures
 
@@ -85,7 +85,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Erro World Sound</title>
     <!-- google font -->
-    <link href="https://fonts.googleapis.com/css?family=Righteous|Shrikhand|Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous|Over+the+Rainbow|Poppins" rel="stylesheet">
     <link rel="shortcut icon" type="image/svg" href="Images/logoicon.svg">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
