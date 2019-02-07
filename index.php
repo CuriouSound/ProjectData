@@ -6,28 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Erro World Sound</title>
     <!-- google font -->
-    <link href="https://fonts.googleapis.com/css?family=Righteous|Shrikhand|Poppins" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Righteous|Shrikhand|Poppins" rel="stylesheet">
     <link rel="shortcut icon" type="image/svg" href="Images/logoicon.svg">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    
+
 </head>
 
 <body>
 
-<header>
-<img src="images/banner.png" class="img-fluid" alt="Responsive image">
-<img id="logo" src="images/logo.svg" alt="logo ERRO World Sound">
+<header class="img-fluid text-center ">
+  <div class="header" >
+    <img src="images/banner.png" class="img-fluid imgfond" alt="Responsive image">
+
+  </div>
+  <img id="logo" class="img-fluid text-center justify-content-center" src="images/logo.svg" alt="logo ERRO World Sound">
+  <h1 class="titre">La musique autour de vous</h1>
 </header>
 
 <main>
-<section class="container">
-  <div class="row justify-content-center">
-  <h1 class="titre">La musique autour de vous</h1>
-  </div>
-</section>
+
 
 <section class="container">
   <div class="row justify-content-center">
@@ -37,9 +37,8 @@
       </p>
        <div id="playlist-new-sorties">
         <div class="card-body">
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
         </div>
-        </div>
+</div>
     </div>
     <div class="card col-md-4 offset-md-1">
       <p>
@@ -52,7 +51,7 @@
         </div>
       </script>
       </div>
-    
+
       <div class="card-body">
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
@@ -84,9 +83,9 @@
         <div class="carousel__container">
           <div class="car__item" id="playlist-basic">
             <h1>9</h1>
-            
+
               <p>Basic plan</p>
-             
+
           </div>
           <div class="car__item" id="playlist-medium">
             <h1>49</h1>
@@ -158,16 +157,16 @@
 <footer>
 <section class="container">
       <div class="row justify-content-end">
-        © ERRO - 2019  
+        © ERRO - 2019
       </div>
 </section>
 </footer>
 
 <!-- code Robin -->
-<!-- 
+<!--
 <div ></div>
         <div id="demo"></div>
-        
+
         <p id="demo"></p> -->
 
 
