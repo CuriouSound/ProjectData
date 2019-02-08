@@ -66,19 +66,19 @@ var container6 = document.getElementById('master');
 var container7 = document.getElementById('container7');
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
 
-container2.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container2.url = "https://api.spotify.com/v1/search?query=top+50&type=playlist&market="+countryCode+"&offset=0&limit=20";
 container3.url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
 container4.url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
-container5.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
-container6.url =  "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+container5.url ="https://api.spotify.com/v1/search?query=top+50"+pays+"&type=playlist";
+container6.url =  "https://api.spotify.com/v1/search?query=friday&type=playlist&market="+countryCode+"&offset=0&limit=20";
 container7.url = "https://api.spotify.com/v1/browse/categories?country="+countryCode+"&locale=sv_gb&offset=0&limit=12";
-console.log(container.url);
-"https://api.spotify.com/v1/search?query=pop&type=artist&"+pays+"&offset=0&limit=20"
+// console.log(container.url);
+// "https://api.spotify.com/v1/search?query=friday&type=playlist&market="+countryCode+"&offset=0&limit=20"
+
+//  "https://api.spotify.com/v1/search?query=playlist&type=track&market=FR&offset=0&limit=20"
 
 
-
-
-console.log(container.url);
+// console.log(container.url);
 
 
 var error = false;

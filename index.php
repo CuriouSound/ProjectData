@@ -43,8 +43,8 @@ elseif (!isset($_GET['code']) && !isset($_COOKIE['token']) && !isset($_COOKIE['r
     on redirige vers spotify pour se connecter au compte. la variable GET "callback" indique où
     spotify renvoie après la connexion.*/
     ?><script>
-			    window.location.href = "https://accounts.spotify.com/authorize?client_id=3aabab9b39d94a038411b964540ac02d&response_type=code&redirect_uri=http://localhost/ProjetData";
-			    </script><?php
+	    window.location.href = "https://accounts.spotify.com/authorize?client_id=3aabab9b39d94a038411b964540ac02d&response_type=code&redirect_uri=http://localhost/ProjetData";
+	    </script><?php
 elseif (!isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])):
     /*Si ni token, ni refresh_token, mais qu'on a le code d'acceptation, on demande un token*/
 
@@ -157,130 +157,81 @@ endif;
           <p id="reponse" class="text-center col-md-12">Le top des playlists écoutées</p>
       </div>
   </section>
-          <div id="carousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <div class="carousel__container">
 
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="d-none d-lg-block">
-                  <div class="slide-box">
-                  <div id="playlist-basic">
-                    <h1>9</h1>
-                    <p>Basic plan</p>
-                  </div>
-                  <div id="playlist-medium">
-                    <h1>49</h1>
-                    <p>Medium plan</p>
-                  </div>
-                  <div id="business">
-                    <h1>99</h1>
-                    <p>Business plan</p>
-                  </div>
-                  <div id="master">
-                    <h1>149</h1>
-                    <p>Master plan</p>
-                  </div>
-                  </div>
-                </div>
-                <div class="d-none d-md-block d-lg-none">
-                  <div class="slide-box">
-                  <div id="playlist-basic">
-                    <h1>9</h1>
-                    <p>Basic plan</p>
-                  </div>
-                  <div id="playlist-medium">
-                    <h1>49</h1>
-                    <p>Medium plan</p>
-                  </div>
-                  <div id="business">
-                    <h1>99</h1>
-                    <p>Business plan</p>
-                  </div>
-                  </div>
-                </div>
-                <div class="d-none d-sm-block d-md-none">
-                  <div class="slide-box">
-                  <div id="business">
-                    <h1>99</h1>
-                    <p>Business plan</p>
-                  </div>
-                  <div id="master">
-                    <h1>149</h1>
-                    <p>Master plan</p>
-                  </div>
-                  </div>
-                </div>
-                <div class="d-block d-sm-none">
-                <div id="playlist-basic">
-                    <h1>9</h1>
-                    <p>Basic plan</p>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="d-none d-lg-block">
-                  <div class="slide-box">
-                  <div id="playlist-basic">
-                    <h1>9</h1>
-                    <p>Basic plan</p>
-                  </div>
-                  <div id="playlist-medium">
-                    <h1>49</h1>
-                    <p>Medium plan</p>
-                  </div>
-                  <div id="business">
-                    <h1>99</h1>
-                    <p>Business plan</p>
-                  </div>
-                  <div id="master">
-                    <h1>149</h1>
-                    <p>Master plan</p>
-                  </div>
-                  </div>
-                </div>
-                <div class="d-none d-md-block d-lg-none">
-                  <div class="slide-box">
-                  <div id="playlist-basic">
-                    <h1>9</h1>
-                    <p>Basic plan</p>
-                  </div>
-                  <div id="playlist-medium">
-                    <h1>49</h1>
-                    <p>Medium plan</p>
-                  </div>
-                  <div id="business">
-                    <h1>99</h1>
-                    <p>Business plan</p>
-                  </div>
-                  </div>
-                </div>
-                <div class="d-none d-sm-block d-md-none">
-                  <div class="slide-box">
-                  <div id="business">
-                    <h1>99</h1>
-                    <p>Business plan</p>
-                  </div>
-                  <div id="master">
-                    <h1>149</h1>
-                    <p>Master plan</p>
-                  </div>
-                  </div>
-                </div>
-                <div class="d-block d-sm-none">
-                <div id="playlist-basic">
-                    <h1>9</h1>
-                    <p>Basic plan</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
+          <div class="car__item" id="playlist-basic">
+            <h1>9</h1>
+
+              <p>Basic plan</p>
+
+          </div>
+          <div class="car__item" id="playlist-medium">
+            <h1>49</h1>
+            <p>Medium plan</p>
+          </div>
+          <div class="car__item"  id="business">
+            <h1>99</h1>
+            <p>Business plan</p>
+          </div>
+          <div class="car__item" id="master">
+            <h1>149</h1>
+            <p>Master plan</p>
+          </div>
+        </div>
+    </div>
+
+
+
+    <div class="carousel-item">
+    <div class="carousel__container" id="container7">
+                            <script id="categorie-profile-template"  type="text/x-handlebars-template">
+        <div class="car__item">
+            <h1>{{categories.items.0.name}}</h1>
+
+              <p>Basic plan</p>
+</div>
+
+          
+          <div class="car__item" id="playlist-medium">
+            <h1>49</h1>
+            <p>Medium plan</p>
+          </div>
+          <div class="car__item"  id="business">
+            <h1>99</h1>
+            <p>Business plan</p>
+          </div>
+          <div class="car__item" id="master">
+            <h1>149</h1>
+            <p>Master plan</p>
+          </div>
+
+                </script>
+    </div>
+    
+  </div>
+
+
+
+
+  <div class="carousel-item">
+    <div class="carousel__container">
+          <div class="car__item">
+            <h1>9</h1>
+            <p>Basic plan</p>
+          </div>
+          <div class="car__item">
+            <h1>49</h1>
+            <p>Medium plan</p>
+          </div>
+          <div class="car__item">
+            <h1>99</h1>
+            <p>Business plan</p>
+          </div>
+          <div class="car__item">
+            <h1>149</h1>
+            <p>Master plan</p>
           </div>
         </div>
       </div>
@@ -320,8 +271,22 @@ endif;
           
       </script>
     </div>
+<<<<<<< HEAD
 
 
+=======
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</section>
+>>>>>>> f76386203d29688e201a8dec81d406c90aed4eac
 
 </main>
 
