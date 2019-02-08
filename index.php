@@ -111,20 +111,20 @@ endif;
 
 <section class="container">
   <div class="row justify-content-center">
-    <div class="card col-md-4" >
-      <p>
+    <div class="card col-md-4 nouvelles" >
+      <p class="text-center">
         Playlist des nouvelles sorties
       </p>
-       <div id="playlist-new-sorties">
+       <div id="playlist-new-sorties" class="justify-content-center text-center">
         <div class="card-body">
         </div>
 </div>
     </div>
-    <div class="card col-md-4 offset-md-1">
+    <div class="card col-md-4 offset-md-1 ecoute">
       <p>
         Les 50 titres les plus écoutés dans le pays
       </p>
-      <div id="reponse-50titres">
+      <div id="reponse-50titres" class="justify-content-center text-center">
         <script id="user-profile-template"  type="text/x-handlebars-template">
           <a href="{{playlists.items.0.external_urls.spotify}}"> <img class="media-object" width="150" src="{{playlists.items.0.images.0.url}}"/></a>
           <p>{{playlists.items.0.name}}</p>
@@ -133,105 +133,151 @@ endif;
       </div>
 
       <div class="card-body">
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    
       </div>
     </div>
 </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+<p id="reponse" class="col-md-12 text-center">Le top des playlists écoutées</p>
 
 <div class="container">
-  <div class="row">
+        <div class="row">
+          <div id="carousel" class="carousel slide" data-ride="carousel">
+            
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="d-none d-lg-block">
+                  <div class="slide-box">
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                    
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                    
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                    
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-none d-md-block d-lg-none">
+                  <div class="slide-box">
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
 
-        <script>
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
 
-          fetch('https://translation.googleapis.com/language/translate/v2&')
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(myJson) {
-            console.log(JSON.stringify(myJson));
-          });
-          let url = "";
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
 
-        </script>
-          <p id="reponse" class="text-center col-md-12">Le top des playlists écoutées</p>
-      </div>
-  </section>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-        <div class="carousel__container">
-
-          <div class="car__item" id="playlist-basic">
-            <h1>9</h1>
-
-              <p>Basic plan</p>
-
-          </div>
-          <div class="car__item" id="playlist-medium">
-            <h1>49</h1>
-            <p>Medium plan</p>
-          </div>
-          <div class="car__item"  id="business">
-            <h1>99</h1>
-            <p>Business plan</p>
-          </div>
-          <div class="car__item" id="master">
-            <h1>149</h1>
-            <p>Master plan</p>
-          </div>
-        </div>
-    </div>
-
+                  </div>
+                </div>
 
 
-    <div class="carousel-item">
-    <div class="carousel__container" id="container7">
-                            <script id="categorie-profile-template"  type="text/x-handlebars-template">
-        <div class="car__item">
-            <h1>{{categories.items.0.name}}</h1>
 
-              <p>Basic plan</p>
-</div>
 
-          
-          <div class="car__item" id="playlist-medium">
-            <h1>49</h1>
-            <p>Medium plan</p>
-          </div>
-          <div class="car__item"  id="business">
-            <h1>99</h1>
-            <p>Business plan</p>
-          </div>
-          <div class="car__item" id="master">
-            <h1>149</h1>
-            <p>Master plan</p>
-          </div>
 
-                </script>
-    </div>
+
+                <div class="d-none d-sm-block d-md-none">
+                  <div class="slide-box">
+                  <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div><div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block d-sm-none justify-content-center">
+                  <div>
+                    <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="d-none d-lg-block">
+                  <div class="slide-box">
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+
+                  </div>
+                </div>
+
+
     
-  </div>
+                <div class="d-none d-md-block d-lg-none">
+                  <div class="slide-box">
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
 
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
 
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-none d-sm-block d-md-none">
+                  <div class="slide-box">
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
 
-
-  <div class="carousel-item">
-    <div class="carousel__container">
-          <div class="car__item">
-            <h1>9</h1>
-            <p>Basic plan</p>
-          </div>
-          <div class="car__item">
-            <h1>49</h1>
-            <p>Medium plan</p>
-          </div>
-          <div class="car__item">
-            <h1>99</h1>
-            <p>Business plan</p>
-          </div>
-          <div class="car__item">
-            <h1>149</h1>
-            <p>Master plan</p>
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block d-sm-none justify-content-center">
+                    <div>
+                      <img src="https://picsum.photos/285/200/?image=4&random" alt="Second slide">
+                    </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
         </div>
       </div>
@@ -261,32 +307,6 @@ endif;
 
 
 
-
-
-    <div class="carousel__container" id="container7">
-      <script id="categorie-profile-template"  type="text/x-handlebars-template">
-        
-
-
-          
-      </script>
-    </div>
-<<<<<<< HEAD
-
-
-=======
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-
-</section>
->>>>>>> f76386203d29688e201a8dec81d406c90aed4eac
 
 </main>
 
@@ -298,7 +318,12 @@ endif;
 </section>
 </footer>
 
+<!-- code Robin -->
+<!--
+<div ></div>
+        <div id="demo"></div>
 
+        <p id="demo"></p> -->
 
 
   <!-- script jquery Robin -->

@@ -53,32 +53,19 @@ function showPosition(position) {
        var userProfileSource = document.getElementById('user-profile-template').innerHTML,
        userProfileTemplate = Handlebars.compile(userProfileSource);
 
-       var categorieProfileSource = document.getElementById('categorie-profile-template').innerHTML,
-       categorieProfileTemplate = Handlebars.compile(categorieProfileSource);
-       
-// https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/top-tracks?country=UK 
+     
 var container = document.getElementById('reponse-50titres');
 var container2 = document.getElementById('playlist-new-sorties');
 var container3 = document.getElementById('playlist-basic');
 var container4 = document.getElementById('playlist-medium');
 var container5 = document.getElementById('business');
 var container6 = document.getElementById('master');
-var container7 = document.getElementById('container7');
+
+
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
 
 container2.url = "https://api.spotify.com/v1/search?query=top+50&type=playlist&market="+countryCode+"&offset=0&limit=20";
-container3.url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
-container4.url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
-container5.url ="https://api.spotify.com/v1/search?query=top+50"+pays+"&type=playlist";
-container6.url =  "https://api.spotify.com/v1/search?query=friday&type=playlist&market="+countryCode+"&offset=0&limit=20";
-container7.url = "https://api.spotify.com/v1/browse/categories?country="+countryCode+"&locale=sv_gb&offset=0&limit=12";
-// console.log(container.url);
-// "https://api.spotify.com/v1/search?query=friday&type=playlist&market="+countryCode+"&offset=0&limit=20"
 
-//  "https://api.spotify.com/v1/search?query=playlist&type=track&market=FR&offset=0&limit=20"
-
-
-// console.log(container.url);
 
 
 var error = false;
@@ -288,24 +275,9 @@ if (error) {
                 });
               }
             });
-$.ajax({
-             url: container7.url, 
-             headers: {
-              'Authorization': 'Bearer ' + access_token
-            },
 
-               // nous passons par le template pour afficher les réponses
 
-               success: function(response) {
 
-                    console.log(response);
-                    container7.innerHTML = categorieProfileTemplate(response);
-                    
-                    $('#login').hide();
-                    $('#loggedin').show();
-
-              }
-            });
           } else {
               // render initial screen
               $('#login').show();
@@ -350,12 +322,7 @@ $('document').ready(function(){
       sldsToShow = 1;
     }
     
-    // $(".carousel__container").slick({
-    //   rows: 1,
-    //   slidesToShow: sldsToShow,
-    //   prevArrow: "<img src='images/caret_left.png' data-role='none' class='slick-prev'>",
-    //   nextArrow: "<img src='images/caret_right.png' data-role='none' class='slick-next'>"
-    // });
+   
 
     $('.mob-menu').click(function(){
       $('.dropdown').toggle();
