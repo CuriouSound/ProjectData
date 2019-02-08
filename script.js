@@ -53,18 +53,23 @@ function showPosition(position) {
        var userProfileSource = document.getElementById('user-profile-template').innerHTML,
        userProfileTemplate = Handlebars.compile(userProfileSource);
 
+       
+       var playlistProfileSource = document.getElementById('playlist-profile-template').innerHTML,
+       playlistProfileTemplate = Handlebars.compile(playlistProfileSource);
      
 var container = document.getElementById('reponse-50titres');
 var container2 = document.getElementById('playlist-new-sorties');
 var container3 = document.getElementById('playlist-basic');
-var container4 = document.getElementById('playlist-medium');
-var container5 = document.getElementById('business');
-var container6 = document.getElementById('master');
+// var container4 = document.getElementById('playlist-medium');
+// var container5 = document.getElementById('business');
+// var container6 = document.getElementById('master');
 
 
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
 
 container2.url = "https://api.spotify.com/v1/search?query=top+50&type=playlist&market="+countryCode+"&offset=0&limit=20";
+
+container3.url =  "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
 
 
 
@@ -153,126 +158,9 @@ if (error) {
 
                success: function(response) {
 
-                $.ajax({
-                 url: response.playlists.items[0].tracks.href, 
-                 headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
+                console.log(response);
+                container3.innerHTML = playlistProfileTemplate(response);
 
-                   // nous passons par le template pour afficher les réponses
-
-                   success: function(response4) {
-
-                    response.playlists.items[0].tracks = response4.items;
-
-
-
-                    console.log(response);
-                    container3.innerHTML = userProfileTemplate(response);
-                    
-                    $('#login').hide();
-                    $('#loggedin').show();
-                  }
-                });
-              }
-            });
-            $.ajax({
-             url: container4.url, 
-             headers: {
-              'Authorization': 'Bearer ' + access_token
-            },
-
-               // nous passons par le template pour afficher les réponses
-
-               success: function(response) {
-
-                $.ajax({
-                 url: response.playlists.items[0].tracks.href, 
-                 headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
-
-                   // nous passons par le template pour afficher les réponses
-
-                   success: function(response5) {
-
-                    response.playlists.items[0].tracks = response5.items;
-
-
-
-                    console.log(response);
-                    container4.innerHTML = userProfileTemplate(response);
-                    
-                    $('#login').hide();
-                    $('#loggedin').show();
-                  }
-                });
-              }
-            });
-            $.ajax({
-             url: container4.url, 
-             headers: {
-              'Authorization': 'Bearer ' + access_token
-            },
-
-               // nous passons par le template pour afficher les réponses
-
-               success: function(response) {
-
-                $.ajax({
-                 url: response.playlists.items[0].tracks.href, 
-                 headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
-
-                   // nous passons par le template pour afficher les réponses
-
-                   success: function(response6) {
-
-                    response.playlists.items[0].tracks = response6.items;
-
-
-
-                    console.log(response);
-                    container5.innerHTML = userProfileTemplate(response);
-                    
-                    $('#login').hide();
-                    $('#loggedin').show();
-                  }
-                });
-              }
-            });
-            $.ajax({
-             url: container4.url, 
-             headers: {
-              'Authorization': 'Bearer ' + access_token
-            },
-
-               // nous passons par le template pour afficher les réponses
-
-               success: function(response) {
-
-                $.ajax({
-                 url: response.playlists.items[0].tracks.href, 
-                 headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
-
-                   // nous passons par le template pour afficher les réponses
-
-                   success: function(response7) {
-
-                    response.playlists.items[0].tracks = response7.items;
-
-
-
-                    console.log(response);
-                    container6.innerHTML = userProfileTemplate(response);
-                    
-                    $('#login').hide();
-                    $('#loggedin').show();
-                  }
-                });
               }
             });
 

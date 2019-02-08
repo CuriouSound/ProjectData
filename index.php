@@ -87,8 +87,7 @@ endif;
     <title>Erro World Sound</title>
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Righteous|Over+the+Rainbow|Poppins" rel="stylesheet">
-    <link rel="shortcut icon" type="image/svg" href="Images/logoicon.svg">
-    <!-- Bootstrap -->
+  <link rel="icon" type="image/svg" href="images/logoicon.svg" />    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
@@ -129,7 +128,124 @@ endif;
           <a href="{{playlists.items.0.external_urls.spotify}}"> <img class="media-object" width="150" src="{{playlists.items.0.images.0.url}}"/></a>
           <p>{{playlists.items.0.name}}</p>
         </div>
-      </script>
+        </script>
+
+        <script id="playlist-profile-template"  type="text/x-handlebars-template">
+        <div class="carousel-item active">
+                <div class="d-none d-lg-block">
+                  <div class="slide-box">
+                    <div>
+                      <img src="{{playlists.items.0.images.0.url}}" alt="Second slide">
+                    </div>
+                    
+                    <div>
+                      <img src="{{playlists.items.1.images.0.url}}" alt="Second slide">
+                    </div>
+                    
+                    <div>
+                      <img src="{{playlists.items.2.images.0.url}}" alt="Second slide">
+                    </div>
+                    
+                    <div>
+                      <img src="{{playlists.items.3.images.0.url}}" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-none d-md-block d-lg-none">
+                  <div class="slide-box">
+                    <div>
+                      <img src="{{playlists.items.0.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.1.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.2.images.0.url}}" alt="Second slide">
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+
+
+
+                <div class="d-none d-sm-block d-md-none">
+                  <div class="slide-box">
+                  <div>
+                      <img src="{{playlists.items.0.images.0.url}}" alt="Second slide">
+                    </div><div>
+                      <img src="{{playlists.items.1.images.0.url}}" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block d-sm-none justify-content-center">
+                  <div>
+                    <img src="{{playlists.items.0.images.0.url}}" alt="Second slide">
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="d-none d-lg-block">
+                  <div class="slide-box">
+                    <div>
+                      <img src="{{playlists.items.4.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.5.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.6.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.7.images.0.url}}" alt="Second slide">
+                    </div>
+
+                  </div>
+                </div>
+
+
+    
+                <div class="d-none d-md-block d-lg-none">
+                  <div class="slide-box">
+                    <div>
+                      <img src="{{playlists.items.3.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.4.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.5.images.0.url}}" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-none d-sm-block d-md-none">
+                  <div class="slide-box">
+                    <div>
+                      <img src="{{playlists.items.2.images.0.url}}" alt="Second slide">
+                    </div>
+
+                    <div>
+                      <img src="{{playlists.items.3.images.0.url}}" alt="Second slide">
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block d-sm-none justify-content-center">
+                    <div>
+                      <img src="{{playlists.items.1.images.0.url}}" alt="Second slide">
+                    </div>
+                </div>
+              </div>
+        </div>
+        </script>
       </div>
 
       <div class="card-body">
@@ -155,7 +271,7 @@ endif;
         <div class="row">
           <div id="carousel" class="carousel slide" data-ride="carousel">
             
-            <div class="carousel-inner">
+            <div class="carousel-inner" id="playlist-basic">
               <div class="carousel-item active">
                 <div class="d-none d-lg-block">
                   <div class="slide-box">
