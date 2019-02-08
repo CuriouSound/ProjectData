@@ -1,81 +1,82 @@
 <?php session_start();
+require "secret.php"; //le app_secret est dans un fichier à part qu'on ne commit pas sur github
+if ((!isset($_COOKIE['token']) || empty($_COOKIE['token'])) && isset($_COOKIE['refresh_token']) && !empty($_COOKIE['refresh_token'])):
+    /* Si on a pas de token dans les cookies (expiré) MAIS qu'on a un refresh_token,
+    on fait un requête pour obtenir un nouveau token*/
 
-  require "secret.php"; //le app_secret est dans un fichier à part qu'on ne commit pas sur github
-  if ((!isset($_COOKIE['token']) || empty($_COOKIE['token'])) && isset($_COOKIE['refresh_token']) && !empty($_COOKIE['refresh_token'])) :
-      /* Si on a pas de token dans les cookies (expiré) MAIS qu'on a un refresh_token,
-      on fait un requête pour obtenir un nouveau token*/
-    
+    /***************************
+    Début requête CURL
+    /***************************/
+    $ch = curl_init();
 
-      /***************************
-          Début requête CURL
-      /***************************/
-      $ch = curl_init();
+    //les données obligatoires :  type de demande (ici, refresh), app_id, app_secret et focément le refresh_token
+    $data = [
+        'grant_type' => "refresh_token",
+        'refresh_token' => $_COOKIE['refresh_token'],
+        'client_id' => "3aabab9b39d94a038411b964540ac02d",
+        'client_secret' => $secret,
+    ];
 
-      //les données obligatoires :  type de demande (ici, refresh), app_id, app_secret et focément le refresh_token
-      $data = [
-          'grant_type' => "refresh_token",
-          'refresh_token' => $_COOKIE['refresh_token'],
-          'client_id' => "3aabab9b39d94a038411b964540ac02d",
-          'client_secret' => $secret,
-      ];
+    curl_setopt($ch, CURLOPT_URL, "https://accounts.spotify.com/api/token");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
-      curl_setopt($ch, CURLOPT_URL, "https://accounts.spotify.com/api/token");
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    //pour WAMP, PAS SECURE
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-      $server_output = curl_exec($ch);
-      $server_output = json_decode($server_output, true); //On convertit une réponse JSON en tableau
+    $server_output = curl_exec($ch);
+    $server_output = json_decode($server_output, true); //On convertit une réponse JSON en tableau
 
-      setrawcookie("token", $server_output['access_token'], time() + 60 *60 );
-      //Quand le serveur a répondu avec un token, on le stock dans les cookies pour 1 heure (timestamp actuel + 60 fois une minute )
+    setrawcookie("token", $server_output['access_token'], time() + 60 * 60);
+    //Quand le serveur a répondu avec un token, on le stock dans les cookies pour 1 heure (timestamp actuel + 60 fois une minute )
 
-      curl_close($ch);
-      /***************************
-            Fin requête CURL
-      /***************************/
+    curl_close($ch);
+    /***************************
+Fin requête CURL
+/***************************/
 
-  elseif(!isset($_GET['code']) && !isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])) :
-      /*Si on a ni code d'authentification, ni token, ni refresh_token, c'est une première visite,
-      on redirige vers spotify pour se connecter au compte. la variable GET "callback" indique où
-      spotify renvoie après la connexion.*/
+elseif (!isset($_GET['code']) && !isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])):
+    /*Si on a ni code d'authentification, ni token, ni refresh_token, c'est une première visite,
+    on redirige vers spotify pour se connecter au compte. la variable GET "callback" indique où
+    spotify renvoie après la connexion.*/
     ?><script>
-    window.location.href = "https://accounts.spotify.com/authorize?client_id=3aabab9b39d94a038411b964540ac02d&response_type=code&redirect_uri=http://localhost/ProjetData";
-    </script><?php
-  elseif(!isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])) :
-      /*Si ni token, ni refresh_token, mais qu'on a le code d'acceptation, on demande un token*/
+			    window.location.href = "https://accounts.spotify.com/authorize?client_id=3aabab9b39d94a038411b964540ac02d&response_type=code&redirect_uri=http://localhost/ProjetData";
+			    </script><?php
+elseif (!isset($_COOKIE['token']) && !isset($_COOKIE['refresh_token'])):
+    /*Si ni token, ni refresh_token, mais qu'on a le code d'acceptation, on demande un token*/
 
-      $ch = curl_init();
+    $ch = curl_init();
 
-      $data = [
+    $data = [
         'grant_type' => "authorization_code",
         'code' => $_GET['code'],
         'redirect_uri' => "http://localhost/ProjetData",
         'client_id' => "3aabab9b39d94a038411b964540ac02d",
-        'client_secret' => $secret
-      ];
+        'client_secret' => $secret,
+    ];
 
-      curl_setopt($ch, CURLOPT_URL,"https://accounts.spotify.com/api/token");
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_URL, "https://accounts.spotify.com/api/token");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-      $server_output = curl_exec($ch);
+    //pour WAMP, PAS SECURE
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
+    $server_output = curl_exec($ch);
+    curl_close($ch);
 
-      curl_close ($ch);
+    $server_output = json_decode($server_output, true);
+    setrawcookie("token", $server_output['access_token'], time() + 60 * 60);
+    setrawcookie("refresh_token", $server_output['refresh_token'], time() + 60 * 60 * 24);
+    //on stock le token pour 1 heure et le refresh_token pour 24heures
 
-      $server_output = json_decode($server_output, true);
-
-      setrawcookie ( "token" , $server_output['access_token'], time() + 60*60  );
-      setrawcookie("refresh_token", $server_output['refresh_token'], time() + 60 * 60 * 24);
-      //on stock le token pour 1 heure et le refresh_token pour 24heures
-
-    endif;
-
-
+endif;
 
 ?><!DOCTYPE html>
 <html lang="fr">
@@ -138,10 +139,9 @@
 </div>
 </section>
 
+<div class="container">
+  <div class="row">
 
-<section id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <section class="container">
-      <div class="row justify-content-center">
         <script>
 
           fetch('https://translation.googleapis.com/language/translate/v2&')
@@ -154,82 +154,174 @@
           let url = "";
 
         </script>
-          <p id="reponse" class="col-md-12">Le top des playlists écoutées</p>
+          <p id="reponse" class="text-center col-md-12">Le top des playlists écoutées</p>
       </div>
   </section>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-        <div class="carousel__container">
-          <div class="car__item" id="playlist-basic">
-            <h1>9</h1>
+          <div id="carousel" class="carousel slide" data-ride="carousel">
 
-              <p>Basic plan</p>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="d-none d-lg-block">
+                  <div class="slide-box">
+                  <div id="playlist-basic">
+                    <h1>9</h1>
+                    <p>Basic plan</p>
+                  </div>
+                  <div id="playlist-medium">
+                    <h1>49</h1>
+                    <p>Medium plan</p>
+                  </div>
+                  <div id="business">
+                    <h1>99</h1>
+                    <p>Business plan</p>
+                  </div>
+                  <div id="master">
+                    <h1>149</h1>
+                    <p>Master plan</p>
+                  </div>
+                  </div>
+                </div>
+                <div class="d-none d-md-block d-lg-none">
+                  <div class="slide-box">
+                  <div id="playlist-basic">
+                    <h1>9</h1>
+                    <p>Basic plan</p>
+                  </div>
+                  <div id="playlist-medium">
+                    <h1>49</h1>
+                    <p>Medium plan</p>
+                  </div>
+                  <div id="business">
+                    <h1>99</h1>
+                    <p>Business plan</p>
+                  </div>
+                  </div>
+                </div>
+                <div class="d-none d-sm-block d-md-none">
+                  <div class="slide-box">
+                  <div id="business">
+                    <h1>99</h1>
+                    <p>Business plan</p>
+                  </div>
+                  <div id="master">
+                    <h1>149</h1>
+                    <p>Master plan</p>
+                  </div>
+                  </div>
+                </div>
+                <div class="d-block d-sm-none">
+                <div id="playlist-basic">
+                    <h1>9</h1>
+                    <p>Basic plan</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="d-none d-lg-block">
+                  <div class="slide-box">
+                  <div id="playlist-basic">
+                    <h1>9</h1>
+                    <p>Basic plan</p>
+                  </div>
+                  <div id="playlist-medium">
+                    <h1>49</h1>
+                    <p>Medium plan</p>
+                  </div>
+                  <div id="business">
+                    <h1>99</h1>
+                    <p>Business plan</p>
+                  </div>
+                  <div id="master">
+                    <h1>149</h1>
+                    <p>Master plan</p>
+                  </div>
+                  </div>
+                </div>
+                <div class="d-none d-md-block d-lg-none">
+                  <div class="slide-box">
+                  <div id="playlist-basic">
+                    <h1>9</h1>
+                    <p>Basic plan</p>
+                  </div>
+                  <div id="playlist-medium">
+                    <h1>49</h1>
+                    <p>Medium plan</p>
+                  </div>
+                  <div id="business">
+                    <h1>99</h1>
+                    <p>Business plan</p>
+                  </div>
+                  </div>
+                </div>
+                <div class="d-none d-sm-block d-md-none">
+                  <div class="slide-box">
+                  <div id="business">
+                    <h1>99</h1>
+                    <p>Business plan</p>
+                  </div>
+                  <div id="master">
+                    <h1>149</h1>
+                    <p>Master plan</p>
+                  </div>
+                  </div>
+                </div>
+                <div class="d-block d-sm-none">
+                <div id="playlist-basic">
+                    <h1>9</h1>
+                    <p>Basic plan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
 
-          </div>
-          <div class="car__item" id="playlist-medium">
-            <h1>49</h1>
-            <p>Medium plan</p>
-          </div>
-          <div class="car__item"  id="business">
-            <h1>99</h1>
-            <p>Business plan</p>
-          </div>
-          <div class="car__item" id="master">
-            <h1>149</h1>
-            <p>Master plan</p>
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="carousel__container" id="container7">
+      <script id="categorie-profile-template"  type="text/x-handlebars-template">
+        
+
+
+          
+      </script>
     </div>
-    <div class="carousel-item">
-    <div class="carousel__container">
-          <div class="car__item">
-            <h1>9</h1>
-            <p>Basic plan</p>
-          </div>
-          <div class="car__item">
-            <h1>49</h1>
-            <p>Medium plan</p>
-          </div>
-          <div class="car__item">
-            <h1>99</h1>
-            <p>Business plan</p>
-          </div>
-          <div class="car__item">
-            <h1>149</h1>
-            <p>Master plan</p>
-          </div>
-        </div>
-    </div>
-    <div class="carousel-item">
-    <div class="carousel__container">
-          <div class="car__item">
-            <h1>9</h1>
-            <p>Basic plan</p>
-          </div>
-          <div class="car__item">
-            <h1>49</h1>
-            <p>Medium plan</p>
-          </div>
-          <div class="car__item">
-            <h1>99</h1>
-            <p>Business plan</p>
-          </div>
-          <div class="car__item">
-            <h1>149</h1>
-            <p>Master plan</p>
-          </div>
-        </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</section>
+
+
 
 </main>
 
@@ -241,12 +333,7 @@
 </section>
 </footer>
 
-<!-- code Robin -->
-<!--
-<div ></div>
-        <div id="demo"></div>
 
-        <p id="demo"></p> -->
 
 
   <!-- script jquery Robin -->
@@ -262,16 +349,16 @@
 
     <script>
       <?php
-      /*Ici on fait une variable JavaScript qui contient le token et qui existera dans script.js puisqu'on le fait
-      juste avant d'inclure script.js. 
-      Si on a le cookie, on utilise le cookie, sinon on utilise la réponse du serveur
-      (à la première demande, les cookies n'existent pas, ils existeront seulement au prochain refresh de la page)*/
-      
-      if(isset($_COOKIE['token']) && !empty($_COOKIE['token'])) : ?>
+/*Ici on fait une variable JavaScript qui contient le token et qui existera dans script.js puisqu'on le fait
+juste avant d'inclure script.js.
+Si on a le cookie, on utilise le cookie, sinon on utilise la réponse du serveur
+(à la première demande, les cookies n'existent pas, ils existeront seulement au prochain refresh de la page)*/
+
+if (isset($_COOKIE['token']) && !empty($_COOKIE['token'])): ?>
         var access_token = "<?=$_COOKIE['token']?>";
-      <?php elseif(isset($server_output['access_token']) && !empty($server_output['access_token'])) : ?>
+      <?php elseif (isset($server_output['access_token']) && !empty($server_output['access_token'])): ?>
         var access_token = "<?=$server_output['access_token']?>";
-      <?php endif; ?>
+      <?php endif;?>
     </script>
 
   <script src="script.js"></script>

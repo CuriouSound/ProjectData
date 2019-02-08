@@ -35,6 +35,7 @@ function showPosition(position) {
   .done(function( response ) {
       // le nom du pays se situe dans la case address, on l'affiche dans #response
       let pays = response.address.country;
+      let countryCode = response.address.country_code;
                         /**
          * Obtains parameters from the hash of the URL
          * @return Object
@@ -51,6 +52,9 @@ function showPosition(position) {
 
        var userProfileSource = document.getElementById('user-profile-template').innerHTML,
        userProfileTemplate = Handlebars.compile(userProfileSource);
+
+       var categorieProfileSource = document.getElementById('categorie-profile-template').innerHTML,
+       categorieProfileTemplate = Handlebars.compile(categorieProfileSource);
        
 // https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/top-tracks?country=UK 
 var container = document.getElementById('reponse-50titres');
@@ -59,14 +63,15 @@ var container3 = document.getElementById('playlist-basic');
 var container4 = document.getElementById('playlist-medium');
 var container5 = document.getElementById('business');
 var container6 = document.getElementById('master');
-
+var container7 = document.getElementById('container7');
 container.url =  "https://api.spotify.com/v1/search?query=top%2050%20"+pays+"&type=playlist";
 
 container2.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
 container3.url = "https://api.spotify.com/v1/search?query=playlist%20"+pays+"&type=playlist";
-container4.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
+container4.url = "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
 container5.url = "https://api.spotify.com/v1/search?query=track,artist%20"+pays+"&type=playlist";
 container6.url =  "https://api.spotify.com/v1/search?query=album%20"+pays+"&type=playlist";
+container7.url = "https://api.spotify.com/v1/browse/categories?country="+countryCode+"&locale=sv_gb&offset=0&limit=12";
 console.log(container.url);
 "https://api.spotify.com/v1/search?query=pop&type=artist&"+pays+"&offset=0&limit=20"
 
@@ -283,7 +288,24 @@ if (error) {
                 });
               }
             });
+$.ajax({
+             url: container7.url, 
+             headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
 
+               // nous passons par le template pour afficher les réponses
+
+               success: function(response) {
+
+                    console.log(response);
+                    container7.innerHTML = categorieProfileTemplate(response);
+                    
+                    $('#login').hide();
+                    $('#loggedin').show();
+
+              }
+            });
           } else {
               // render initial screen
               $('#login').show();
